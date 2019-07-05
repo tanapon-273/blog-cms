@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Http\Requests\CreateCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -39,7 +40,7 @@ class CategoryController extends Controller
 
         //insert data to datebase
         Category::create(['name'=>$request->name]);
-        Session()->flash('success','บันทึกข้อมูบเรียบร้อยแล้ว');
+        Session()->flash('success','บันทึกข้อมูลเรียบร้อยแล้ว');
         return redirect(route('categories.index'));
     }
 
@@ -60,9 +61,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return view('categories.create')->with('category',$category);
     }
 
     /**
@@ -72,9 +73,14 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        $category->update([
+            'name' => $request->name
+        ]);
+
+        Session()->flash('success','อัพเดทข้อมูลเรียบร้อยแล้ว');
+        return redirect(route('categories.index'));
     }
 
     /**
