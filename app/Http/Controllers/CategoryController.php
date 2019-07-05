@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
+use App\Http\Requests\CreateCategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -14,7 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('categories.index');
+        return view('categories.index')->with('categories',Category::all());
     }
 
     /**
@@ -33,14 +34,12 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateCategoryRequest $request)
     {
-        $this->validate($request,[
-            'name'=>'required|unique:categories'
-        ]);
 
         //insert data to datebase
         Category::create(['name'=>$request->name]);
+        Session()->flash('success','บันทึกข้อมูบเรียบร้อยแล้ว');
         return redirect(route('categories.index'));
     }
 
