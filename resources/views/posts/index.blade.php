@@ -8,7 +8,8 @@
 			Post
 		</div>
 		<div class="card-body">
-			<table class="table">
+			@if($posts->count()>0)
+				<table class="table">
 				<thead>
 					<th>Image</th>
 					<th>Title</th>
@@ -23,18 +24,25 @@
 							</td>
 							<td>{{$post->title}}</td>
 							<td>
-								<a href="#" class="btn btn-info btn-sm">Edit</a>
+								<a href="{{route('posts.edit',$post->id)}}" class="btn btn-info btn-sm">Edit</a>
 							</td>
 							<td>
-								<a href="#" class="btn btn-danger btn-sm">Delete</a>
+								<form class="delete_form" action="{{route('posts.destroy',$post->id)}}" method="post">
+									@csrf
+									<input type="hidden" name="_method" value="DELETE">
+									<input type="submit" name="" value="Delete" class="btn btn-danger btn-sm">	
+								</form>
 							</td>
 						</tr>
 					@endforeach
 				</tbody>
 			</table>
+			@else
+				<h3 class="text text-center">No Post</h3>
+			@endif
 		</div>
 	</div>
-	<!-- <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('.delete_form').on('submit',function(){
@@ -45,5 +53,5 @@
 				}
 			});
 		});
-	</script> -->
+	</script>
 @endsection
