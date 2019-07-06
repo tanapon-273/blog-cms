@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CreatePostRequest;
+use App\Post;
 
 class PostController extends Controller
 {
@@ -13,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('posts.index');
+        return view('posts.index')->with('posts',Post::all());
     }
 
     /**
@@ -32,9 +34,17 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreatePostRequest $request)
     {
-        //
+        $image = $request->image->store('posts');
+        Post::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'content' => $request->content,
+            'image' => $image
+        ]);
+        Session()->flash('success','บันทึกข้อมูลเรียบร้อยแล้ว');
+        return redirect(route('posts.index'));
     }
 
     /**
