@@ -16,6 +16,8 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::resource('categories','CategoryController');
-Route::resource('posts','PostController');
+Route::middleware(['auth'])->group(function(){
+	Route::resource('categories','CategoryController');
+	Route::resource('posts','PostController');
+});
 Route::get('/home', 'HomeController@index')->name('home');

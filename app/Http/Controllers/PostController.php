@@ -7,6 +7,7 @@ use App\Http\Requests\CreatePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Category;
 use App\Post;
+use App\Http\Middleware\VerifyCategory;
 
 class PostController extends Controller
 {
@@ -15,6 +16,11 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct(){
+        $this->middleware('verifyCategory')->only(['create','store']);
+    }
+
     public function index()
     {
         return view('posts.index')->with('posts',Post::all());
