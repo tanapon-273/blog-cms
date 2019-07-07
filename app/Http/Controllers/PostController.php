@@ -93,6 +93,10 @@ class PostController extends Controller
             $post->deleteImage();
             $data['image'] = $image;   
         }
+        if($request->category){
+            $data['category_id']=$request->category;
+        }
+
         $post->update($data);
         Session()->flash('success','อัพเดทข้อมูลเรียบร้อยแล้ว');
         return redirect(route('posts.index'));
