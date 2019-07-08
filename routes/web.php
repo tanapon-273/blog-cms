@@ -23,9 +23,7 @@ Route::middleware(['auth'])->group(function(){
 });
 
 Route::middleware(['auth','admin'])->group(function(){
-	Route::resource('categories','CategoryController');
-	Route::resource('posts','PostController');
-	Route::resource('tags','TagsController');
 	Route::get('users','Usercontroller@index')->name('users.index');
+	Route::post('users/{user}/makeadmin','Usercontroller@makeadmin')->name('user.makeadmin');
 });
 Route::get('/home', 'HomeController@index')->name('home');
