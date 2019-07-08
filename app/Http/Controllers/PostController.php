@@ -122,6 +122,7 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete(); //ลบข้อมูลในฐานข้อมูล
+        $post->tags()->detach($post->post_id); //ลบ tags
         $post->deleteImage(); //ลบรูปภาพออกจาก Storage
         Session()->flash('success','ลบข้อมูลในฐานข้อมูลเรียบร้อยแล้ว');
         return redirect(route('posts.index')); 

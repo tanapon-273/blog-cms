@@ -6,14 +6,14 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
 
-    <title>Tanapon Studio</title>
+    <title>Kong Ruksiam Studio</title>
 
     <!-- Styles -->
-    <link href="{{asset('css/page.css')}}" rel="stylesheet">
+    <link href="{{asset('css/page.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
 
     <!-- Favicons -->
-    <link rel="apple-touch-icon" href="{{asset('img/laravel152.png')}}">
+    <link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}">
     <link rel="icon" href="{{asset('img/favicon.png')}}">
   </head>
 
@@ -40,7 +40,7 @@
         <div class="row">
           <div class="col-md-8 mx-auto">
             <h1>Laravel Framework Workshop</h1>
-            <p class="lead-2 opacity-90 mt-3">Tanapon Studio</p>
+            <p class="lead-2 opacity-90 mt-3">Kong Ruksiam Studio</p>
           </div>
         </div>
 
@@ -131,7 +131,7 @@
     </main>
 
     <!-- Scripts -->
-    <script src="{{asset('js/page.js')}}"></script>
+    <script src="{{asset('js/page.min.js')}}"></script>
     <script src="{{asset('js/script.js')}}"></script>
 
   </body>
