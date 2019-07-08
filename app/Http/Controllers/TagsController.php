@@ -89,6 +89,11 @@ class TagsController extends Controller
      */
     public function destroy(Tag $tag)
     {
+        // if($tag->posts->count()>0){
+        //     Session()->flash('error','ไม่สามารถลบได้เนื่องจากมีบทความใช้งานอยู่');
+        //     return redirect()->back();
+        // }
+
         $tag->delete();
         Session()->flash('success','ลบข้อมูลเรียบร้อยแล้ว');
         return redirect(route('tags.index'));
