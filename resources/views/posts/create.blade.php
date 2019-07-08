@@ -38,7 +38,7 @@
 					<input type="file" name="image" value="" class="form-control">
 				</div>
 				<div class="form-group">
-					<label for="image">Category</label>
+					<label for="title">Category</label>
 					<select class="form-control" name="category">
 						@foreach($categories as $category)
 							<option value="{{$category->id}}"
@@ -51,6 +51,22 @@
 						@endforeach
 					</select>
 				</div>
+				@if($tags->count()>0)
+					<div class="form-group">
+					<label for="title">Tags</label>
+					<select class="form-control" name="tags[]" id="select_tags" multiple>
+						@foreach($tags as $tag)
+							<option value="{{$tag->id}}"
+								@if(isset($post))
+									@if($post->hasTag($tag->id))
+									selected
+									@endif
+								@endif
+								>{{$tag->name}}</option>
+						@endforeach
+					</select>
+					</div>
+				@endif
 				<div class="form-group">
 					<input type="submit" name="" value="{{isset($post)? 'Update Post' : 'Create Post'}}" class="btn btn-success">
 				</div>
@@ -59,4 +75,10 @@
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.1.1/trix.js" charset="utf-8"></script>
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.1.1/trix.css">
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#select_tags').select2();
+		});
+	</script>
 @endsection
