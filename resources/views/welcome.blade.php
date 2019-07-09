@@ -51,6 +51,7 @@
                   </div>
                 @endforeach
               </div>
+              {{$posts->links()}} <!-- /.Pageination -->
             </div>
             @include('layouts.sidebar')
           </div>
