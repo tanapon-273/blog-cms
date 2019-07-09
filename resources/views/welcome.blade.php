@@ -39,7 +39,7 @@
             <div class="col-md-8 col-xl-9">
               <div class="row gap-y">
 
-                @foreach($posts as $post)
+                @forelse($posts as $post)
                     <div class="col-md-6">
                         <div class="card border hover-shadow-6 mb-6 d-block">
                         <a href="{{route('blog.show',$post->id)}}"><img class="card-img-top" src="storage/{{$post->image}}" alt="Card image cap"></a>
@@ -48,10 +48,12 @@
                         <h5 class="mb-0"><a class="text-dark" href="{{route('blog.show',$post->id)}}">{{$post->title}}</a></h5>
                       </div>
                     </div>
-                  </div>
-                @endforeach
+                    </div>
+                    @empty
+                      <p class="text-center">No Result : <strong>{{request()->query('search')}}</strong></p>
+                @endforelse
               </div>
-              {{$posts->links()}} <!-- /.Pageination -->
+              {{$posts->appends(['search'=>request()->query('search')])->links()}} <!-- /.Pageination -->
             </div>
             @include('layouts.sidebar')
           </div>
